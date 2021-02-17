@@ -197,10 +197,10 @@ let () =
     prerr_endline ("Usage: " ^ Sys.argv.(0) ^ " <file>")
   else
     let f = open_in_bin Sys.argv.(1) in
-    let buf = String.create (in_channel_length f) in
-    let () = really_input f buf 0 (String.length buf) in
+    let buf = Bytes.create (in_channel_length f) in
+    let () = really_input f buf 0 (Bytes.length buf) in
     let () = close_in f in
-    let elf = Elf.parse buf in
+    let elf = Elf.parse (Bytes.unsafe_to_string buf) in
     match elf with
     | None -> prerr_endline "parse failed"
     | Some elf -> print_elf elf

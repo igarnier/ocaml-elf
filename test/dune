@@ -1,0 +1,6 @@
+(executable
+ (name test_parser)
+ (libraries data-encoding bitstring ocaml-elf)
+ (preprocess (pps ppx_inline_test ppx_bitstring))
+ (flags (:standard -open Ocaml_elf))
+)
